@@ -15,6 +15,7 @@ def clock(func):
         t0 = time.perf_counter()
         result = func(*args, **kwargs)
         elapsed = time.perf_counter() - t0
-        print('Spend time:%0.8fs' % elapsed)
+        print('Spend time:%0.8fs' % (elapsed, ))
         return result
+
     return clocked
