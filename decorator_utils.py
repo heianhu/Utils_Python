@@ -4,6 +4,7 @@ __author__ = 'heianhu'
 
 import time
 import collections
+import functools
 
 
 def timer(label='', trace=True):
@@ -54,3 +55,14 @@ def Tracer(aClass):
     return Wrapper
 
 
+def coroutine(func):
+    """
+    向前执行到第一个yield表达式，预激fun()
+    :return:
+    """
+    @functools.wraps(func)
+    def primer(*args, **kwargs):
+        gen = func(*args, **kwargs)
+        next(gen)
+        return gen
+    return primer()
